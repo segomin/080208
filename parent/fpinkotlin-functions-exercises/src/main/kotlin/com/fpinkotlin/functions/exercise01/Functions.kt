@@ -25,3 +25,47 @@ fun <T, U, V> higherCompose(): ((T) -> V) -> ((U) -> T) -> ((U) -> V) = { f ->
 fun add(x: Int): (y: Int) -> Int = {
     x + it
 }
+
+// higherAndThen<Int, Int, Int>()(::square)(::triple)(x) == triple(square(x))
+fun <T, U, V> higherAndThen(): ((T) -> U) -> ((U) -> V) -> ((T) -> V) = { g ->
+    { f ->
+        { x ->
+            f(g(x))
+        }
+    }
+}
+
+// val f = { a: Int -> { b: Double -> a * (1 + b / 100) } }
+// x: Int, y: Double -> partialA(x, f)(y) == f(x)(y)
+fun <T, V> partialA(x: T, f: (T) -> (V) -> V): (V) -> V = { y ->
+    f(x)(y)
+}
+
+// y.isNaN() || y.isInfinite() || partialB(y, f)(x) == f(x)(y)
+fun <T, V> partialB(y: V, f: (T) -> (V) -> V): (T) -> V = { x ->
+    f(x)(y)
+}
+
+// curried<Int, Double, String, Boolean>()(a)(b)(c)(d) == "$a, $b, $c, $d"
+fun <T, U, V, W> curried(): (T) -> ((U) -> ((V) -> ((W) -> String))) = { a ->
+    { b ->
+        { c ->
+            { d ->
+                "$a, $b, $c, $d"
+            }
+        }
+    }
+}
+
+// x: Int, y: Double -> curry(f)(x)(y) == f(x, y)
+fun <T, U, V> curry(f: (T, U) -> V): (T) -> ((U) -> V) = { x ->
+    { y ->
+        f(x, y)
+    }
+}
+
+// x: Int, y: Double -> swapArgs(curry(f))(y)(x) == f(x, y)
+// fun swapArgs(crr: (Int) -> (Double) -> Double): (Double) -> (Int) -> (Double)
+fun <T, U, V>swapArgs(crr: (T) -> (U) -> V): (U) -> (T) -> (V) = { y ->
+    { x -> crr(x)(y) }
+}

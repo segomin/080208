@@ -1,6 +1,7 @@
 package com.fpinkotlin.functions.exercise08
 
 
+import com.fpinkotlin.functions.exercise01.partialB
 import io.kotlintest.properties.forAll
 import io.kotlintest.specs.StringSpec
 

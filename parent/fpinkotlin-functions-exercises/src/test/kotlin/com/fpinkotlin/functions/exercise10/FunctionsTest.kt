@@ -1,6 +1,7 @@
 package com.fpinkotlin.functions.exercise10
 
 
+import com.fpinkotlin.functions.exercise01.curry
 import io.kotlintest.properties.forAll
 import io.kotlintest.specs.StringSpec
 

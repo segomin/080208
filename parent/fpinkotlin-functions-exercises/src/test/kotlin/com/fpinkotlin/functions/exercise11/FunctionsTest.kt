@@ -1,6 +1,8 @@
 package com.fpinkotlin.functions.exercise11
 
 
+import com.fpinkotlin.functions.exercise01.curry
+import com.fpinkotlin.functions.exercise01.swapArgs
 import io.kotlintest.properties.forAll
 import io.kotlintest.specs.StringSpec
 
