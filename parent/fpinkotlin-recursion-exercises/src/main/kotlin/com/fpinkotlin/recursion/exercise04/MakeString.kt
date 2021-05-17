@@ -1,7 +1,19 @@
 package com.fpinkotlin.recursion.exercise04
 
 fun <T> makeString(list: List<T>, delim: String): String {
-    TODO("makeString")
+
+    tailrec fun sum(tail: List<T>, acc: String): String {
+        return when {
+            tail.isEmpty() -> acc
+//            acc.isEmpty() -> sum(tail.tail(), "${tail.head()}") since test has empty string
+            else -> sum(tail.tail(), "${acc}${delim}${tail.head()}")
+        }
+    }
+    return when {
+        list.isEmpty() -> ""
+        list.size == 1 -> "${list.head()}"
+        else -> sum(list.tail(), "${list.head()}")
+    }
 }
 
 fun <T> List<T>.head(): T =

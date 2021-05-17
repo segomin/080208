@@ -13,11 +13,10 @@ fun <T, V>compose(f: (T) -> V): ((T) -> T) -> ((T) -> V) = { g ->
 }
 
 // by higherCompose<Int, Int, Int>()(::square)(::triple)(x) == square(triple(x))
-fun <T, U, V> higherCompose(): ((T) -> V) -> ((U) -> T) -> ((U) -> V) = { f ->
-    { g ->
-        { x ->
-            f(g(x))
-        }
+// fun <T, U, V> higherCompose(): ((U) -> V) -> ((T) -> U) -> ((T) -> V) = { f ->
+fun <T, U, V> higherCompose() = { f: (U) -> V ->
+    { g: (T) -> U ->
+        { x: T -> f(g(x)) }
     }
 }
 
@@ -27,11 +26,10 @@ fun add(x: Int): (y: Int) -> Int = {
 }
 
 // higherAndThen<Int, Int, Int>()(::square)(::triple)(x) == triple(square(x))
-fun <T, U, V> higherAndThen(): ((T) -> U) -> ((U) -> V) -> ((T) -> V) = { g ->
-    { f ->
-        { x ->
-            f(g(x))
-        }
+// fun <T, U, V> higherAndThen(): ((T) -> U) -> ((U) -> V) -> ((T) -> V) = { g ->
+fun <T, U, V> higherAndThen() = { g: (T) -> U ->
+    { f: (U) -> V ->
+        { x: T -> f(g(x)) }
     }
 }
 
@@ -47,10 +45,10 @@ fun <T, V> partialB(y: V, f: (T) -> (V) -> V): (T) -> V = { x ->
 }
 
 // curried<Int, Double, String, Boolean>()(a)(b)(c)(d) == "$a, $b, $c, $d"
-fun <T, U, V, W> curried(): (T) -> ((U) -> ((V) -> ((W) -> String))) = { a ->
-    { b ->
-        { c ->
-            { d ->
+fun <T, U, V, W> curried(): (T) -> ((U) -> ((V) -> ((W) -> String))) = { a: T ->
+    { b: U ->
+        { c: V ->
+            { d: W ->
                 "$a, $b, $c, $d"
             }
         }
@@ -58,8 +56,8 @@ fun <T, U, V, W> curried(): (T) -> ((U) -> ((V) -> ((W) -> String))) = { a ->
 }
 
 // x: Int, y: Double -> curry(f)(x)(y) == f(x, y)
-fun <T, U, V> curry(f: (T, U) -> V): (T) -> ((U) -> V) = { x ->
-    { y ->
+fun <T, U, V> curry(f: (T, U) -> V): (T) -> ((U) -> V) = { x: T ->
+    { y: U ->
         f(x, y)
     }
 }

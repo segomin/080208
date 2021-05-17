@@ -9,6 +9,7 @@ class ListTest: StringSpec() {
 
         "add" {
             forAll { a: Int, b: Int ->
+                println("-------  ${a} + ${b} -------")
                 add(a, b) == a + b
             }
         }
