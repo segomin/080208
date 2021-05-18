@@ -10,6 +10,10 @@ class FoldRightTest : StringSpec() {
 
         "string" {
             forAll(CharKListGenerator()) { list ->
+                println("============================");
+                println(list);
+                println(list.toCharArray().fold("") { s, c -> s + c});
+                println(string(list));
                 string(list) == list.toCharArray().fold("") { s, c -> s + c}
             }
         }
