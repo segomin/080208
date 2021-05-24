@@ -22,4 +22,6 @@ fun <T, U> foldLeft(list: List<T>, z: U, f: (U, T) -> U): U {
     return foldLeft_(list, z, f)
 }
 
-fun <T, U> map(list: List<T>, f: (T) -> U): List<U> = TODO("map")
+fun <T, U> map(list: List<T>, f: (T) -> U): List<U> {
+    return foldLeft(list, listOf()) { acc, x -> acc + f(x)}
+}

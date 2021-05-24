@@ -31,3 +31,12 @@ fun <T> unfold(seed: T, f: (T) -> T, p: (T) -> Boolean): List<T> {
 
     return unfold_(listOf(), seed)
 }
+//fun <T> unfold(seed: T, f: (T) -> T, p: (T) -> Boolean): List<T> {
+//    val list = mutableListOf<T>()
+//    var elem = seed;
+//    while (p(elem)) {
+//        list.add(elem)
+//        elem = f(elem)
+//    }
+//    return list.toList()
+//}
