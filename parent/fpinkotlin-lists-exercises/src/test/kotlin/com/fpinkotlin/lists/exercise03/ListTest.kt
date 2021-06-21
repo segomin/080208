@@ -14,6 +14,8 @@ class ListTest: StringSpec() {
                 second.isEmpty()
             else {
                 (i % first.size).let {
+                    println(second)
+                    val abc = second.drop(0).setHead(10)
                     second.drop(it).toString() ==
                         first.drop(it).joinToString(", ", "[", ", NIL]")
                 }

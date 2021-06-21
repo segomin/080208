@@ -10,6 +10,8 @@ class ListTest: StringSpec() {
 
         "cons" {
             forAll(IntListGenerator(), Gen.int()) { (first, second), i ->
+                println(second)
+                println(second.cons(i).toString())
                 second.cons(i).toString() == first.let { if (it.isEmpty()) "[$i, NIL]" else it.joinToString(", ", "[$i, ", ", NIL]") }
             }
         }

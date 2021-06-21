@@ -4,15 +4,18 @@ package com.fpinkotlin.lists.exercise10
 import io.kotlintest.properties.Gen
 import io.kotlintest.properties.forAll
 import io.kotlintest.specs.StringSpec
+import org.junit.jupiter.api.Assertions.assertEquals
+import java.text.MessageFormat
 import java.util.*
+import kotlin.collections.HashMap
 
-class ListTest: StringSpec() {
+class ListTest : StringSpec() {
 
     init {
 
         "foldLeft" {
             forAll(IntListGenerator()) { (_, second) ->
-                second.foldLeft(0) { a -> { b -> a + b } } ==  second.foldRight(0) { a -> { b -> a + b } }
+                second.foldLeft(0) { a -> { b -> a + b } } == second.foldRight(0) { a -> { b -> a + b } }
             }
         }
 

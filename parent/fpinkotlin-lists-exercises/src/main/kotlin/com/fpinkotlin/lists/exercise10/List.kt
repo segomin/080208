@@ -92,6 +92,8 @@ sealed class List<out A> {
     }
 }
 
-fun sum(list: List<Int>): Int = TODO("sum")
+fun sum(list: List<Int>): Int = list.foldLeft(0) {acc -> { x -> x + acc}}
+// = list.foldRight(0) {x -> { acc -> x + acc}}
 
-fun product(list: List<Double>): Double = TODO("product")
+fun product(list: List<Double>): Double = list.foldLeft(1.0) {acc -> {x -> x * acc}}
+// = list.foldRight(1) {x -> { acc -> x * acc}}

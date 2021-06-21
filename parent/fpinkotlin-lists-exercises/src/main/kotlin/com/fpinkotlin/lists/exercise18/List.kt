@@ -35,7 +35,8 @@ sealed class List<out A> {
 
     fun <B> coFoldRight(identity: B, f: (A) -> (B) -> B): B = coFoldRight(identity, this.reverse(), identity, f)
 
-    fun <B> map(f: (A) -> B): List<B> = TODO("map")
+    fun <B> map(f: (A) -> B): List<B> = foldLeft(Nil as List<B>) { acc -> { x -> acc.cons(f(x))} }.reverse()
+//    fun <B> map(f: (A) -> B): List<B> = foldRight(Nil as List<B>) { x -> { acc -> acc.cons(f(x))} }
 
     internal object Nil: List<Nothing>() {
 
